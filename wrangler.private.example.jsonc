@@ -1,0 +1,54 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bar-private",
+  "main": "src/private-worker.ts",
+  "compatibility_date": "2026-08-13",
+  "compatibility_flags": ["nodejs_compat"],
+  "keep_names": true,
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    {
+      "pattern": "bar-private.example.com",
+      "custom_domain": true
+    }
+  ],
+  "vars": {
+    "ACCESS_TEAM_DOMAIN": "https://your-team.cloudflareaccess.com",
+    "ACCESS_AUDIENCE": "REPLACE_WITH_INGESTION_ACCESS_AUDIENCE",
+    "ACCESS_SUMMARY_AUDIENCE": "REPLACE_WITH_SUMMARY_ACCESS_AUDIENCE"
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "assets": {
+    "directory": "./private-public",
+    "binding": "ASSETS",
+    "html_handling": "none",
+    "run_worker_first": ["/*"]
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "PrivateRepositoryAgent",
+        "class_name": "PrivateRepositoryAgent"
+      }
+    ]
+  },
+  "exports": {
+    "PrivateRepositoryAgent": {
+      "type": "durable-object",
+      "storage": "sqlite"
+    }
+  },
+  "workflows": [
+    {
+      "name": "bar-private-investigation",
+      "binding": "PRIVATE_INVESTIGATION_WORKFLOW",
+      "class_name": "PrivateInvestigationWorkflow"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

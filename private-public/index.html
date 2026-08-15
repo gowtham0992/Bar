@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Bar · Private investigation</title>
+    <link rel="stylesheet" href="/private.css" />
+    <script src="/private-app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand" aria-label="Bar private investigation">
+        <span class="brand-mark">B</span>
+        <span>Bar</span>
+      </div>
+      <span class="access-badge">Cloudflare Access protected</span>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Private CI investigation</p>
+        <h1 id="page-title">Loading investigation…</h1>
+        <p id="investigation-context" class="lede">
+          Retrieving sanitized evidence and durable investigation state.
+        </p>
+        <div class="identifier-row">
+          <span id="status-badge" class="status-badge" data-status="queued">Queued</span>
+          <span class="identifier-label">Investigation</span>
+          <code id="investigation-id"></code>
+        </div>
+      </section>
+
+      <section id="error-banner" class="error-banner" hidden role="alert">
+        <div>
+          <strong>Bar could not refresh this investigation.</strong>
+          <p id="error-message"></p>
+        </div>
+        <button id="retry-button" class="secondary-button" type="button">Retry</button>
+      </section>
+
+      <div class="top-grid">
+        <section class="panel progress-panel" aria-labelledby="progress-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Workflow</p>
+              <h2 id="progress-title">Investigation progress</h2>
+            </div>
+            <span class="polling-note">Polling by investigation ID</span>
+          </div>
+          <ol id="milestones" class="milestones"></ol>
+          <p id="workflow-id" class="quiet"></p>
+        </section>
+
+        <section class="panel diagnosis-panel" aria-labelledby="diagnosis-title">
+          <div id="diagnosis-pending" class="empty-state">
+            <span class="pulse" aria-hidden="true"></span>
+            <p>Diagnosis will appear when the Workflow finishes.</p>
+          </div>
+          <div id="diagnosis-content" hidden>
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Workers AI diagnosis</p>
+                <h2 id="diagnosis-title"></h2>
+              </div>
+              <span id="confidence" class="confidence"></span>
+            </div>
+            <p id="diagnosis-explanation" class="diagnosis-copy"></p>
+            <div class="detail-block">
+              <h3>Evidence citations</h3>
+              <div id="diagnosis-citations" class="citations"></div>
+            </div>
+            <div class="detail-grid">
+              <div class="detail-block">
+                <h3>What remains uncertain</h3>
+                <p id="uncertainty"></p>
+              </div>
+              <div class="detail-block resolution-block">
+                <h3>Proposed resolution</h3>
+                <p id="proposed-resolution"></p>
+              </div>
+            </div>
+            <div id="memory-assessment" class="memory-note" hidden></div>
+          </div>
+        </section>
+      </div>
+
+      <section class="panel model-panel" aria-labelledby="model-title">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">Usage</p>
+            <h2 id="model-title">Model calls</h2>
+          </div>
+          <div class="call-summary">
+            <strong id="model-call-count">0 of 1 diagnosis call used</strong>
+            <span id="follow-up-call-count">0 of 3 follow-up calls used</span>
+          </div>
+        </div>
+        <div id="token-usage" class="usage-grid">
+          <div><span>Prompt</span><strong>—</strong></div>
+          <div><span>Completion</span><strong>—</strong></div>
+          <div><span>Total</span><strong>—</strong></div>
+        </div>
+        <p class="quiet">Follow-up calls are budgeted separately and never retry automatically.</p>
+      </section>
+
+      <section class="panel evidence-panel" aria-labelledby="evidence-title">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">Current run</p>
+            <h2 id="evidence-title">Sanitized evidence</h2>
+          </div>
+          <span id="evidence-count" class="count-badge">0 items</span>
+        </div>
+        <div id="evidence-list" class="evidence-list"></div>
+      </section>
+
+      <div class="interaction-grid">
+        <section class="panel" aria-labelledby="follow-up-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Ask Bar</p>
+              <h2 id="follow-up-title">Follow up</h2>
+            </div>
+            <span id="follow-up-budget" class="count-badge">3 calls left</span>
+          </div>
+          <div id="follow-up-history" class="conversation"></div>
+          <form id="follow-up-form" class="follow-up-form">
+            <label for="follow-up-question">Question about this evidence</label>
+            <textarea
+              id="follow-up-question"
+              maxlength="600"
+              rows="3"
+              placeholder="What evidence supports the proposed resolution?"
+              required
+            ></textarea>
+            <button id="follow-up-submit" class="primary-button" type="submit">
+              Ask follow-up
+            </button>
+          </form>
+          <p id="chat-closed" class="closed-note" hidden>
+            Follow-up chat is closed because this investigation has been reviewed.
+          </p>
+        </section>
+
+        <section class="panel" aria-labelledby="review-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Human decision</p>
+              <h2 id="review-title">Review resolution</h2>
+            </div>
+          </div>
+          <p class="review-copy">
+            Only an approved or corrected resolution becomes reusable repository memory.
+          </p>
+          <div id="review-actions" class="review-actions">
+            <button id="approve-button" class="primary-button" type="button">Approve</button>
+            <button id="correct-button" class="secondary-button" type="button">
+              Correct and approve
+            </button>
+            <button id="reject-button" class="danger-button" type="button">Reject</button>
+          </div>
+          <form id="correction-form" class="correction-form" hidden>
+            <label for="corrected-resolution">Corrected resolution</label>
+            <textarea id="corrected-resolution" maxlength="2000" rows="5" required></textarea>
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Save correction</button>
+              <button id="cancel-correction" class="text-button" type="button">Cancel</button>
+            </div>
+          </form>
+          <div id="review-outcome" class="review-outcome" hidden></div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

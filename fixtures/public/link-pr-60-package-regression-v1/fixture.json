@@ -1,0 +1,65 @@
+{
+  "change_summary": [
+    {
+      "additions": 4,
+      "deletions": 0,
+      "path": ".github/workflows/release.yml",
+      "status": "modified"
+    },
+    {
+      "additions": 0,
+      "deletions": 0,
+      "path": "mcp_package/pyproject.toml",
+      "status": "unchanged"
+    }
+  ],
+  "evidence_ids": [
+    "E-PKG-R2-001",
+    "E-PKG-R2-002",
+    "E-PKG-R2-003",
+    "E-PKG-R2-004"
+  ],
+  "fixture_id": "link-pr-60-package-regression-v1",
+  "focus": {
+    "failed_step": "Build wheel from source distribution",
+    "job": "package-regression"
+  },
+  "job_summary": [
+    {
+      "conclusion": "failure",
+      "name": "package-regression",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Build source distribution"
+        },
+        {
+          "conclusion": "success",
+          "name": "Inspect source distribution"
+        },
+        {
+          "conclusion": "failure",
+          "name": "Build wheel from source distribution"
+        }
+      ]
+    }
+  ],
+  "memory_key": "python-package-sdist-missing-forced-include",
+  "missing_evidence": [],
+  "run": {
+    "attempt": 1,
+    "base_sha": "643e208adbbe2dfd1c91bf9e8305e6dec2b037a6",
+    "event": "workflow_dispatch",
+    "head_sha": "d1b707d6da5f2331719e3e7d7fc70a0e6faff32c"
+  },
+  "scenario": {
+    "based_on_fixture_id": "link-pr-60-package-v1",
+    "kind": "synthetic_replay"
+  },
+  "schema_version": 1,
+  "source": {
+    "public_url": "https://github.com/gowtham0992/link/pull/60",
+    "pull_request": 60,
+    "repository": "gowtham0992/link"
+  }
+}

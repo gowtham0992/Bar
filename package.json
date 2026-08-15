@@ -1,0 +1,27 @@
+{
+  "name": "bar",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "npm run typecheck && npm test && npm run test:private-sqlite",
+    "dev": "wrangler dev",
+    "test:e2e": "playwright test",
+    "test:e2e:private": "playwright test --config playwright.private.config.ts",
+    "test:private-sqlite": "vitest run --config vitest.private.config.ts",
+    "test": "vitest run src",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.private-test.json"
+  },
+  "dependencies": {
+    "agents": "0.20.1",
+    "jose": "^6.2.8"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.21.3",
+    "@cloudflare/workers-types": "5.20260813.1",
+    "@playwright/test": "1.61.0",
+    "typescript": "7.0.2",
+    "vitest": "4.1.10",
+    "wrangler": "4.123.0"
+  }
+}

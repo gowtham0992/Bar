@@ -1,0 +1,142 @@
+{
+  "change_summary": [
+    {
+      "additions": 9,
+      "deletions": 1,
+      "path": ".github/workflows/ci.yml",
+      "status": "modified"
+    },
+    {
+      "additions": 13,
+      "deletions": 1,
+      "path": "mcp_package/pyproject.toml",
+      "status": "modified"
+    }
+  ],
+  "evidence_ids": [
+    "E-PKG-001",
+    "E-PKG-002",
+    "E-PKG-003",
+    "E-PKG-004"
+  ],
+  "fixture_id": "link-pr-60-package-v1",
+  "focus": {
+    "failed_step": "Build link-mcp",
+    "job": "package"
+  },
+  "job_summary": [
+    {
+      "conclusion": "success",
+      "name": "windows-cold-walk",
+      "steps": []
+    },
+    {
+      "conclusion": "success",
+      "name": "installer-syntax",
+      "steps": []
+    },
+    {
+      "conclusion": "success",
+      "name": "lint",
+      "steps": []
+    },
+    {
+      "conclusion": "failure",
+      "name": "package",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install build tools"
+        },
+        {
+          "conclusion": "failure",
+          "name": "Build link-mcp"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Check package metadata"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Install built wheel"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "MCP stdio smoke test"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Post Run actions/setup-python@v5"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "conclusion": "success",
+      "name": "macos-clean-install",
+      "steps": []
+    },
+    {
+      "conclusion": "failure",
+      "name": "windows-smoke",
+      "steps": []
+    },
+    {
+      "conclusion": "success",
+      "name": "release-hygiene",
+      "steps": []
+    },
+    {
+      "conclusion": "success",
+      "name": "test (3.12)",
+      "steps": []
+    },
+    {
+      "conclusion": "success",
+      "name": "test (3.14)",
+      "steps": []
+    },
+    {
+      "conclusion": "success",
+      "name": "test (3.10)",
+      "steps": []
+    }
+  ],
+  "memory_key": "python-package-sdist-missing-forced-include",
+  "missing_evidence": [],
+  "run": {
+    "attempt": 1,
+    "base_sha": "643e208adbbe2dfd1c91bf9e8305e6dec2b037a6",
+    "event": "pull_request",
+    "head_sha": "d1b707d6da5f2331719e3e7d7fc70a0e6faff32c"
+  },
+  "scenario": {
+    "based_on_fixture_id": null,
+    "kind": "captured"
+  },
+  "schema_version": 1,
+  "source": {
+    "public_url": "https://github.com/gowtham0992/link/pull/60",
+    "pull_request": 60,
+    "repository": "gowtham0992/link"
+  }
+}

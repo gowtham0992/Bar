@@ -1,0 +1,27 @@
+{
+  "acceptable_memory_assessments": [
+    "applies",
+    "partially_applies"
+  ],
+  "acceptable_outcomes": [
+    "diagnosed"
+  ],
+  "fixture_id": "link-pr-60-package-regression-v1",
+  "forbidden_claims": [
+    "The old resolution proves the current failure without examining the current artifact.",
+    "The failure is caused by a GitHub outage."
+  ],
+  "required_claims": [
+    "The current source distribution omits .linkignore while the current wheel configuration force-includes it."
+  ],
+  "required_evidence_ids": [
+    "E-PKG-R2-001",
+    "E-PKG-R2-002",
+    "E-PKG-R2-003"
+  ],
+  "review_notes": [
+    "The prior approved resolution is a hypothesis; the current evidence must independently support the diagnosis.",
+    "No E-PKG-001 through E-PKG-004 citation is valid for this fixture."
+  ],
+  "schema_version": 1
+}

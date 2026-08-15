@@ -1,0 +1,90 @@
+[
+  {
+    "content": "2026-08-13T18:12:41.1800000Z Processing ./dist/link_mcp-0.1.0.tar.gz\n2026-08-13T18:12:42.0300000Z Building wheel for link-mcp (pyproject.toml)\n2026-08-13T18:12:42.2200000Z FileNotFoundError: Forced include not found: <TEMP>/.linkignore\n2026-08-13T18:12:42.2600000Z ERROR: Failed building wheel for link-mcp\n2026-08-13T18:12:42.2900000Z ##[error]Process completed with exit code 1.\n",
+    "id": "E-PKG-R2-001",
+    "kind": "job_log",
+    "redactions": {
+      "credential": 0,
+      "email": 0,
+      "environment": 0,
+      "path": 1,
+      "url": 0
+    },
+    "sequence": 1,
+    "source": {
+      "job": "package-regression",
+      "original_line_end": 118,
+      "original_line_start": 113,
+      "path": null,
+      "sha_role": null,
+      "step": "Build wheel from source distribution"
+    },
+    "title": "Separate regression build failure"
+  },
+  {
+    "content": "link_mcp-0.1.0/\nlink_mcp-0.1.0/PKG-INFO\nlink_mcp-0.1.0/link_core/\nlink_mcp-0.1.0/link_mcp/\nlink_mcp-0.1.0/pyproject.toml\n\nNo .linkignore entry is present in the source distribution listing.\n",
+    "id": "E-PKG-R2-002",
+    "kind": "artifact_listing",
+    "redactions": {
+      "credential": 0,
+      "email": 0,
+      "environment": 0,
+      "path": 0,
+      "url": 0
+    },
+    "sequence": 2,
+    "source": {
+      "job": "package-regression",
+      "original_line_end": 101,
+      "original_line_start": 94,
+      "path": null,
+      "sha_role": null,
+      "step": "Inspect source distribution"
+    },
+    "title": "Current source distribution contents"
+  },
+  {
+    "content": "[tool.hatch.build.targets.wheel.force-include]\n\"../link.py\" = \"link_cli.py\"\n\"../serve.py\" = \"serve.py\"\n\"../LINK.md\" = \"LINK.md\"\n\"../.linkignore\" = \".linkignore\"\n\n[tool.hatch.build.targets.sdist]\nexclude = [\n    \".env\",\n    \".env.*\",\n    \"dist/\",\n]\n",
+    "id": "E-PKG-R2-003",
+    "kind": "source",
+    "redactions": {
+      "credential": 0,
+      "email": 0,
+      "environment": 0,
+      "path": 0,
+      "url": 0
+    },
+    "sequence": 3,
+    "source": {
+      "job": null,
+      "original_line_end": 67,
+      "original_line_start": 30,
+      "path": "mcp_package/pyproject.toml",
+      "sha_role": "head",
+      "step": null
+    },
+    "title": "Current package inclusion configuration"
+  },
+  {
+    "content": "- name: Build source distribution\n  working-directory: mcp_package\n  run: python -m build --sdist\n\n- name: Inspect source distribution\n  working-directory: mcp_package\n  run: python -m tarfile --list dist/link_mcp-0.1.0.tar.gz\n\n- name: Build wheel from source distribution\n  working-directory: mcp_package\n  run: python -m pip wheel --no-deps dist/link_mcp-0.1.0.tar.gz\n",
+    "id": "E-PKG-R2-004",
+    "kind": "source",
+    "redactions": {
+      "credential": 0,
+      "email": 0,
+      "environment": 0,
+      "path": 0,
+      "url": 0
+    },
+    "sequence": 4,
+    "source": {
+      "job": "package-regression",
+      "original_line_end": 76,
+      "original_line_start": 65,
+      "path": ".github/workflows/release.yml",
+      "sha_role": "synthetic_replay",
+      "step": "Build wheel from source distribution"
+    },
+    "title": "Separate regression workflow commands"
+  }
+]

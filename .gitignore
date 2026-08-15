@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.env
+.env.local
+wrangler.private.jsonc
+.venv/
+.wrangler/
+coverage/
+dist/
+node_modules/
+playwright-report/
+test-results/

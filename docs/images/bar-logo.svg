@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Bar logo</title>
+  <desc id="desc">A warm white B and slash on a dark square.</desc>
+  <rect width="256" height="256" rx="30" fill="#17211e"/>
+  <text
+    x="128"
+    y="137"
+    fill="#f3f0e8"
+    font-family="SFMono-Regular, Roboto Mono, Cascadia Code, Consolas, monospace"
+    font-size="92"
+    font-weight="700"
+    text-anchor="middle"
+    dominant-baseline="middle"
+  >B/</text>
+</svg>

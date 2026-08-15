@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Bar investigates sanitized CI failures with Cloudflare Workflows and Workers AI."
+    />
+    <title>Bar — CI investigation replay</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Bar home">
+        <span class="brand-mark" aria-hidden="true">B/</span>
+        <span>Bar</span>
+      </a>
+      <div class="demo-label"><span aria-hidden="true"></span>Public replay</div>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">PR #60 · gowtham0992/link</p>
+        <h1 id="page-title">Trace the failure.<br />Keep the evidence.</h1>
+        <p class="intro-copy">
+          Run a sanitized CI investigation through the real Cloudflare Workflow
+          and Workers AI diagnosis path.
+        </p>
+      </section>
+
+      <section class="chooser surface" aria-labelledby="fixture-heading">
+        <div class="section-heading">
+          <div>
+            <p class="section-index">01 / Select</p>
+            <h2 id="fixture-heading">Choose a failed check</h2>
+          </div>
+          <p>Two captured failures, one synthetic similar replay, and one bounded diagnosis call per investigation.</p>
+        </div>
+
+        <form id="fixture-form">
+          <fieldset>
+            <legend class="visually-hidden">Available sanitized fixtures</legend>
+            <div id="fixture-options" class="fixture-options" aria-live="polite">
+              <div class="fixture-loading" aria-label="Loading fixtures">
+                <span></span><span></span>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-footer">
+            <p id="selection-note">No GitHub credentials or private evidence are used.</p>
+            <button class="primary-button" id="start-button" type="submit" disabled>
+              <span>Start investigation</span>
+              <span aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <div id="error-banner" class="error-banner" role="alert" hidden>
+        <div>
+          <strong>Investigation interrupted</strong>
+          <p id="error-message"></p>
+        </div>
+        <button id="retry-button" type="button">Try again</button>
+      </div>
+
+      <section id="investigation" class="investigation" aria-labelledby="investigation-title" hidden>
+        <div class="investigation-header">
+          <div>
+            <p class="section-index">02 / Investigate</p>
+            <h2 id="investigation-title">Investigation</h2>
+          </div>
+          <div class="investigation-identity">
+            <span id="status-badge" class="status-badge">Queued</span>
+            <span class="identity-label">ID</span>
+            <code id="investigation-id"></code>
+          </div>
+        </div>
+
+        <div class="workbench">
+          <aside class="progress-panel surface" aria-labelledby="progress-title">
+            <p class="panel-kicker">Live workflow</p>
+            <h3 id="progress-title">Progress</h3>
+            <ol id="progress-list" class="progress-list" aria-live="polite"></ol>
+            <p id="progress-note" class="progress-note"></p>
+          </aside>
+
+          <section id="diagnosis-panel" class="diagnosis-panel surface" aria-labelledby="diagnosis-title">
+            <div id="diagnosis-content"></div>
+          </section>
+        </div>
+
+        <section class="evidence-section" aria-labelledby="evidence-title">
+          <div class="section-heading evidence-heading">
+            <div>
+              <p class="section-index">03 / Verify</p>
+              <h2 id="evidence-title">Evidence</h2>
+            </div>
+            <p id="evidence-summary">Evidence appears as the Workflow loads it.</p>
+          </div>
+          <div id="evidence-list" class="evidence-list"></div>
+        </section>
+
+        <section id="follow-up-section" class="follow-up-section" aria-labelledby="follow-up-title" hidden>
+          <div class="section-heading">
+            <div>
+              <p class="section-index">04 / Question</p>
+              <h2 id="follow-up-title">Follow up</h2>
+            </div>
+            <p id="follow-up-limit">Three evidence-bound answers per investigation.</p>
+          </div>
+          <div class="conversation surface">
+            <div id="follow-up-list" class="follow-up-list" aria-live="polite"></div>
+            <form id="follow-up-form" class="follow-up-form">
+              <label for="follow-up-question">Ask about this diagnosis or its evidence</label>
+              <textarea id="follow-up-question" name="question" maxlength="600" rows="3" required></textarea>
+              <div class="action-row">
+                <p id="follow-up-note">Answers use the same sanitized evidence shown above.</p>
+                <button id="follow-up-button" class="primary-button" type="submit">Ask Bar <span aria-hidden="true">↗</span></button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section id="review-section" class="review-section" aria-labelledby="review-title" hidden>
+          <div class="section-heading">
+            <div>
+              <p class="section-index">05 / Decide</p>
+              <h2 id="review-title">Review resolution</h2>
+            </div>
+            <p>Only approved resolutions become reusable memory.</p>
+          </div>
+          <div class="review-card surface">
+            <div>
+              <p id="resolution-label" class="panel-kicker">Proposed resolution</p>
+              <p id="proposed-resolution" class="proposed-resolution"></p>
+            </div>
+            <div id="review-actions" class="review-actions">
+              <button id="approve-button" class="primary-button" type="button">Approve</button>
+              <button id="correct-button" class="secondary-button" type="button">Correct and approve</button>
+              <button id="reject-button" class="danger-button" type="button">Reject</button>
+            </div>
+            <form id="correction-form" class="correction-form" hidden>
+              <label for="corrected-resolution">Corrected resolution</label>
+              <textarea id="corrected-resolution" maxlength="2000" rows="5" required></textarea>
+              <div class="action-row">
+                <button id="cancel-correction" class="text-button" type="button">Cancel</button>
+                <button class="primary-button" type="submit">Save correction and approve</button>
+              </div>
+            </form>
+            <div id="review-outcome" class="review-outcome" role="status" hidden></div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <span>Bar / a bounded CI investigation agent</span>
+      <span>Cloudflare Workers · Workflows · Workers AI</span>
+    </footer>
+  </body>
+</html>

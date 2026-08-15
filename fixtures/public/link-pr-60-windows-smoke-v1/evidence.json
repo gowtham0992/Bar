@@ -1,0 +1,112 @@
+[
+  {
+    "content": "2026-08-13T04:55:35.9467850Z E         File \"<TOOL_CACHE>\\windows\\Python\\3.12.10\\x64\\Lib\\shutil.py\", line 781, in rmtree\n2026-08-13T04:55:35.9468357Z E           return _rmtree_unsafe(path, onexc)\n2026-08-13T04:55:35.9468698Z E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-08-13T04:55:35.9469174Z E         File \"<TOOL_CACHE>\\windows\\Python\\3.12.10\\x64\\Lib\\shutil.py\", line 635, in _rmtree_unsafe\n2026-08-13T04:55:35.9469679Z E           onexc(os.unlink, fullname, err)\n2026-08-13T04:55:35.9470161Z E         File \"<TOOL_CACHE>\\windows\\Python\\3.12.10\\x64\\Lib\\tempfile.py\", line 909, in onexc\n2026-08-13T04:55:35.9470662Z E           _os.unlink(path)\n2026-08-13T04:55:35.9471952Z E       PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: '<HOME>\\\\AppData\\\\Local\\\\Temp\\\\tmp73e1vwn6\\\\.link-cache\\\\page-fts-v1.sqlite'\n2026-08-13T04:55:35.9472675Z \n2026-08-13T04:55:35.9472853Z tests\\test_token_economics.py:17: AssertionError\n2026-08-13T04:55:35.9473262Z ============================== warnings summary ===============================\n2026-08-13T04:55:35.9474030Z tests/test_guard_core.py::McpGuardTests::test_recall_packet_carries_guard_on_conflicting_query\n2026-08-13T04:55:35.9475727Z   <TOOL_CACHE>\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\pydantic_settings\\sources\\utils.py:47: IncompleteFieldDefinitionWarning: Field 'lifespan' has an incomplete definition: its annotation contains an unresolved forward reference, so settings sources may fail to correctly resolve its value. Call `model_rebuild()` on the model where the field is defined, once all the referenced types are defined.\n2026-08-13T04:55:35.9477208Z     warnings.warn(\n2026-08-13T04:55:35.9477348Z \n2026-08-13T04:55:35.9477617Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n2026-08-13T04:55:35.9478106Z =========================== short test summary info ===========================\n2026-08-13T04:55:35.9479356Z FAILED tests/test_guard_core.py::McpGuardTests::test_recall_packet_carries_guard_on_conflicting_query - PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: '<HOME>\\\\AppData\\\\Local\\\\Temp\\\\tmpd6i3cb9c\\\\.link-cache\\\\page-fts-v1.sqlite'\n2026-08-13T04:55:35.9482287Z FAILED tests/test_token_economics.py::TokenEconomicsTests::test_packets_stay_bounded_and_plateau - AssertionError: 1 != 0 : <TOOL_CACHE>\\windows\\Python\\3.12.10\\x64\\Lib\\site-packages\\pydantic_settings\\sources\\utils.py:47: IncompleteFieldDefinitionWarning: Field 'lifespan' has an incomplete definition: its annotation contains an unresolved forward reference, so settings sources may fail to correctly resolve its value. Call `model_rebuild()` on the model where the field is defined, once all the referenced types are defined.\n2026-08-13T04:55:35.9484232Z   warnings.warn(\n2026-08-13T04:55:35.9484531Z Traceback (most recent call last):\n2026-08-13T04:55:35.9491816Z   File \"<TOOL_CACHE>\\windows\\Python\\3.12.10\\x64\\Lib\\shutil.py\", line 633, in _rmtree_unsafe\n2026-08-13T04:55:35.9492423Z     os.unlink(fullname)\n2026-08-13T04:55:35.9493251Z PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: '<HOME>\\\\AppData\\\\Local\\\\Temp\\\\tmp73e1vwn6\\\\.link-cache\\\\page-fts-v1.sqlite'\n2026-08-13T04:55:35.9493954Z \n2026-08-13T04:55:35.9494159Z During handling of the above exception, another exception occurred:\n2026-08-13T04:55:35.9494481Z \n2026-08-13T04:55:35.9494798Z Traceback (most recent call last):\n2026-08-13T04:55:35.9495376Z   File \"<WORKSPACE>\\scripts\\eval_token_economics.py\", line 301, in <module>\n2026-08-13T04:55:35.9495842Z     raise SystemExit(main())\n2026-08-13T04:55:35.9496139Z                      ^^^^^^\n2026-08-13T04:55:35.9496600Z   File \"<WORKSPACE>\\scripts\\eval_token_economics.py\", line 237, in main\n2026-08-13T04:55:35.9497076Z     with tempfile.TemporaryDirectory() as temp:\n2026-08-13T04:55:35.9497439Z          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-08-13T04:55:35.9497953Z   File \"<TOOL_CACHE>\\windows\\Python\\3.12.10\\x64\\Lib\\tempfile.py\", line 950, in __exit__\n2026-08-13T04:55:35.9498467Z     self.cleanup()\n2026-08-13T04:55:35.9498918Z   File \"<TOOL_CACHE>\\windows\\Python\\3.12.10\\x64\\Lib\\tempfile.py\", line 954, in cleanup\n2026-08-13T04:55:35.9499492Z     self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)\n2026-08-13T04:55:35.9500071Z   File \"<TOOL_CACHE>\\windows\\Python\\3.12.10\\x64\\Lib\\tempfile.py\", line 934, in _rmtree\n2026-08-13T04:55:35.9500558Z     _shutil.rmtree(name, onexc=onexc)\n2026-08-13T04:55:35.9501039Z   File \"<TOOL_CACHE>\\windows\\Python\\3.12.10\\x64\\Lib\\shutil.py\", line 781, in rmtree\n2026-08-13T04:55:35.9501527Z     return _rmtree_unsafe(path, onexc)\n2026-08-13T04:55:35.9501933Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-08-13T04:55:35.9502423Z   File \"<TOOL_CACHE>\\windows\\Python\\3.12.10\\x64\\Lib\\shutil.py\", line 635, in _rmtree_unsafe\n2026-08-13T04:55:35.9502962Z     onexc(os.unlink, fullname, err)\n2026-08-13T04:55:35.9503444Z   File \"<TOOL_CACHE>\\windows\\Python\\3.12.10\\x64\\Lib\\tempfile.py\", line 909, in onexc\n2026-08-13T04:55:35.9503921Z     _os.unlink(path)\n2026-08-13T04:55:36.0151555Z PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: '<HOME>\\\\AppData\\\\Local\\\\Temp\\\\tmp73e1vwn6\\\\.link-cache\\\\page-fts-v1.sqlite'\n2026-08-13T04:55:36.0152603Z 2 failed, 907 passed, 1 skipped, 1 warning, 16 subtests passed in 286.04s (0:04:46)\n2026-08-13T04:55:36.2782898Z ##[error]Process completed with exit code 1.\n",
+    "id": "E-WIN-001",
+    "kind": "job_log",
+    "redactions": {
+      "credential": 0,
+      "email": 0,
+      "environment": 0,
+      "path": 18,
+      "url": 0
+    },
+    "sequence": 1,
+    "source": {
+      "job": "windows-smoke",
+      "original_line_end": 463,
+      "original_line_start": 414,
+      "path": null,
+      "sha_role": null,
+      "step": "Run broad Windows tests"
+    },
+    "title": "Failure window from windows-smoke job"
+  },
+  {
+    "content": "          PYTHONPATH=mcp_package python link.py verify-mcp <TEMP> --python python\n\n      - name: HTTP viewer smoke test\n        if: matrix.python-version == '3.12'\n        run: python scripts/smoke_http_viewer.py\n\n  windows-smoke:\n    runs-on: windows-latest\n    steps:\n      - uses: actions/checkout@v4\n\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n\n      - name: Compile Python\n        run: python -m compileall -q link.py serve.py scripts mcp_package\n\n      - name: Install MCP package for verification\n        run: python -m pip install ./mcp_package\n\n      - name: Install test runner\n        run: python -m pip install \"pytest>=8,<10\"\n\n      - name: Run broad Windows tests\n        run: python -m pytest tests -q --ignore=tests/test_installers.py --ignore=tests/test_serve.py --ignore=tests/test_large_wiki_smoke.py\n\n      - name: Demo value-loop smoke test\n        shell: pwsh\n        run: |\n          $demo = Join-Path $env:RUNNER_TEMP \"link-demo-ci\"\n",
+    "id": "E-WIN-002",
+    "kind": "source",
+    "redactions": {
+      "credential": 0,
+      "email": 0,
+      "environment": 0,
+      "path": 1,
+      "url": 0
+    },
+    "sequence": 2,
+    "source": {
+      "job": "windows-smoke",
+      "original_line_end": 99,
+      "original_line_start": 69,
+      "path": ".github/workflows/ci.yml",
+      "sha_role": "head",
+      "step": "Run broad Windows tests"
+    },
+    "title": "Windows smoke workflow commands"
+  },
+  {
+    "content": "        if float(first_store[\"mean_tokens\"]) else 0.0\n    )\n    # The claim is the plateau, not the total: the final quadrupling.\n    plateau_ratio = (\n        float(growth[-1][\"mean_tokens\"]) / float(growth[-2][\"mean_tokens\"])\n        if len(growth) > 1 and float(growth[-2][\"mean_tokens\"]) else 0.0\n    )\n\n    with tempfile.TemporaryDirectory() as temp:\n        brief_wiki = _make_wiki(Path(temp))\n        _populate(brief_wiki, len(INTENTS))\n        session_brief = measure_session_brief(brief_wiki)\n        handoff_cost = measure_handoff_block(brief_wiki.parent)\n\n    report = {\n        \"budgets\": budgets,\n        \"growth\": growth,\n        \"mcp_session_brief\": session_brief,\n        \"handoff_block\": handoff_cost,\n        \"store_growth_factor\": round(float(last_store[\"memories\"]) / float(first_store[\"memories\"]), 1),\n        \"packet_growth_factor\": round(growth_ratio, 3),\n        \"plateau_ratio\": round(plateau_ratio, 3),\n        \"queries_measured\": len(queries),\n    }\n\n    failures: list[str] = []\n    for budget, row in budgets.items():\n",
+    "id": "E-WIN-003",
+    "kind": "source",
+    "redactions": {
+      "credential": 0,
+      "email": 0,
+      "environment": 0,
+      "path": 0,
+      "url": 0
+    },
+    "sequence": 3,
+    "source": {
+      "job": "windows-smoke",
+      "original_line_end": 255,
+      "original_line_start": 229,
+      "path": "scripts/eval_token_economics.py",
+      "sha_role": "head",
+      "step": "Run broad Windows tests"
+    },
+    "title": "Token economics evaluator cleanup context"
+  },
+  {
+    "content": "    \"\"\"Every agent gets the guard through recall - not just the hooked one.\"\"\"\n\n    def test_recall_packet_carries_guard_on_conflicting_query(self):\n        import importlib\n        import json\n        import tempfile\n        from pathlib import Path as P\n        from link_core.memory import write_memory_page\n        with tempfile.TemporaryDirectory() as temp:\n            root = P(temp)\n            wiki = root / \"wiki\"\n            (wiki / \"memories\").mkdir(parents=True)\n            (wiki / \"index.md\").write_text(\"# I\\n\", encoding=\"utf-8\")\n            (wiki / \"log.md\").write_text(\"# L\\n\", encoding=\"utf-8\")\n            write_memory_page(\n                wiki, \"I only deploy the payments service on Tuesdays.\",\n                title=\"Only deploy on Tuesdays\", memory_type=\"preference\",\n                scope=\"user\", tags=None, source=\"t\",\n                timestamp=\"2026-08-01T00:00:00Z\",\n            )\n            sys.argv = [\"link_mcp\", \"--wiki\", str(wiki), \"--surface\", \"slim\"]\n            import link_mcp.server as server\n            importlib.reload(server)\n            first = json.loads(server.recall(query=\"deploy the payments service on friday\", mode=\"query\", budget=\"micro\"))\n            self.assertIn(\"guard\", first)\n            self.assertIn(\"Tuesdays\", first[\"guard\"])\n            # Cooldown shared through the ledger: second recall is quiet.\n",
+    "id": "E-WIN-004",
+    "kind": "source",
+    "redactions": {
+      "credential": 0,
+      "email": 0,
+      "environment": 0,
+      "path": 0,
+      "url": 0
+    },
+    "sequence": 4,
+    "source": {
+      "job": "windows-smoke",
+      "original_line_end": 161,
+      "original_line_start": 135,
+      "path": "tests/test_guard_core.py",
+      "sha_role": "head",
+      "step": "Run broad Windows tests"
+    },
+    "title": "Guard test temporary-directory context"
+  },
+  {
+    "content": "ROOT = Path(__file__).resolve().parents[1]\n\n\nclass TokenEconomicsTests(unittest.TestCase):\n    def test_packets_stay_bounded_and_plateau(self):\n        result = subprocess.run(\n            [sys.executable, str(ROOT / \"scripts\" / \"eval_token_economics.py\"), \"--json\", \"--quick\"],\n            capture_output=True, text=True, timeout=600,\n        )\n        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)\n        report = json.loads(result.stdout)\n        for budget, row in report[\"budgets\"].items():\n            self.assertLessEqual(row[\"max_tokens\"], row[\"ceiling\"], budget)\n        # Quick mode checks deceleration; the full run (no --quick) verifies\n        # the plateau at 1,600 memories and produces the published numbers.\n        means = [row[\"mean_tokens\"] for row in report[\"growth\"]]\n        first_step = means[1] / means[0]\n        last_step = means[-1] / means[-2]\n        self.assertLessEqual(last_step, first_step, report)\n\n\n",
+    "id": "E-WIN-005",
+    "kind": "source",
+    "redactions": {
+      "credential": 0,
+      "email": 0,
+      "environment": 0,
+      "path": 0,
+      "url": 0
+    },
+    "sequence": 5,
+    "source": {
+      "job": "windows-smoke",
+      "original_line_end": 28,
+      "original_line_start": 8,
+      "path": "tests/test_token_economics.py",
+      "sha_role": "head",
+      "step": "Run broad Windows tests"
+    },
+    "title": "Token economics failing test invocation"
+  }
+]

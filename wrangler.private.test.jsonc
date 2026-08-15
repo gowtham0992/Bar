@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bar-private-agent-test",
+  "main": "test/private-agent-test-worker.ts",
+  "compatibility_date": "2026-08-13",
+  "compatibility_flags": ["nodejs_compat"],
+  "keep_names": true,
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "PrivateRepositoryAgent",
+        "class_name": "PrivateRepositoryAgent"
+      }
+    ]
+  },
+  "exports": {
+    "PrivateRepositoryAgent": {
+      "type": "durable-object",
+      "storage": "sqlite"
+    }
+  },
+  "workflows": [
+    {
+      "name": "bar-private-agent-test-workflow",
+      "binding": "PRIVATE_INVESTIGATION_WORKFLOW",
+      "class_name": "TestPrivateWorkflow"
+    }
+  ]
+}

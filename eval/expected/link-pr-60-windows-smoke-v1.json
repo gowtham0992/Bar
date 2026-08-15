@@ -1,0 +1,20 @@
+{
+  "acceptable_outcomes": [
+    "diagnosed"
+  ],
+  "fixture_id": "link-pr-60-windows-smoke-v1",
+  "forbidden_claims": [
+    "The evidence proves the exact component that retains the SQLite handle."
+  ],
+  "required_claims": [
+    "Windows cleanup cannot delete page-fts-v1.sqlite because another process still holds the file open."
+  ],
+  "required_evidence_ids": [
+    "E-WIN-001",
+    "E-WIN-003"
+  ],
+  "review_notes": [
+    "A high-confidence symptom-level diagnosis is supported; require explicit uncertainty about the handle owner and exact fix."
+  ],
+  "schema_version": 1
+}

@@ -1,0 +1,90 @@
+[
+  {
+    "content": "2026-08-13T04:50:15.6172692Z     json_out[\"return_val\"] = hook(**hook_input[\"kwargs\"])\n2026-08-13T04:50:15.6173126Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-08-13T04:50:15.6173949Z   File \"<TOOL_CACHE>/Python/3.12.13/x64/lib/python3.12/site-packages/pyproject_hooks/_in_process/_in_process.py\", line 280, in build_wheel\n2026-08-13T04:50:15.6174724Z     return _build_backend().build_wheel(\n2026-08-13T04:50:15.6175040Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-08-13T04:50:15.6175641Z   File \"<TEMP>/lib/python3.12/site-packages/hatchling/build.py\", line 58, in build_wheel\n2026-08-13T04:50:15.6176348Z     return os.path.basename(next(builder.build(directory=wheel_directory, versions=[\"standard\"])))\n2026-08-13T04:50:15.6176745Z                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-08-13T04:50:15.6177230Z   File \"<TEMP>/lib/python3.12/site-packages/hatchling/builders/plugin/interface.py\", line 157, in build\n2026-08-13T04:50:15.6177721Z     artifact = version_api[version](directory, **build_data)\n2026-08-13T04:50:15.6177996Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-08-13T04:50:15.6178456Z   File \"<TEMP>/lib/python3.12/site-packages/hatchling/builders/wheel.py\", line 528, in build_standard\n2026-08-13T04:50:15.6178926Z     for included_file in self.recurse_included_files():\n2026-08-13T04:50:15.6179186Z                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-08-13T04:50:15.6179697Z   File \"<TEMP>/lib/python3.12/site-packages/hatchling/builders/plugin/interface.py\", line 179, in recurse_included_files\n2026-08-13T04:50:15.6180483Z     yield from self.recurse_forced_files(self.config.get_force_include())\n2026-08-13T04:50:15.6181037Z   File \"<TEMP>/lib/python3.12/site-packages/hatchling/builders/plugin/interface.py\", line 239, in recurse_forced_files\n2026-08-13T04:50:15.6181505Z     raise FileNotFoundError(msg)\n2026-08-13T04:50:15.6181833Z FileNotFoundError: Forced include not found: <TEMP>/.linkignore\n2026-08-13T04:50:15.6374509Z ERROR Backend subprocess exited when trying to invoke build_wheel\n2026-08-13T04:50:15.6374790Z \n2026-08-13T04:50:15.6506654Z ##[error]Process completed with exit code 1.\n",
+    "id": "E-PKG-001",
+    "kind": "job_log",
+    "redactions": {
+      "credential": 0,
+      "email": 0,
+      "environment": 0,
+      "path": 7,
+      "url": 0
+    },
+    "sequence": 1,
+    "source": {
+      "job": "package",
+      "original_line_end": 292,
+      "original_line_start": 271,
+      "path": null,
+      "sha_role": null,
+      "step": "Build link-mcp"
+    },
+    "title": "Failure window from package job"
+  },
+  {
+    "content": " [tool.hatch.build.targets.wheel]\n packages = [\"link_mcp\", \"link_core\"]\n+\n+# The full CLI for pip installs (including Windows, which has no brew):\n+# the repo-root link.py ships twice on purpose - once as the importable\n+# link_cli module behind the `lnk` console script, once as the plain\n+# link.py data file that copy_runtime_files() plants into workspaces.\n+# serve.py / LINK.md / .linkignore ride along for the same reason.\n+[tool.hatch.build.targets.wheel.force-include]\n+\"../link.py\" = \"link_cli.py\"\n+\"../serve.py\" = \"serve.py\"\n+\"../LINK.md\" = \"LINK.md\"\n+\"../.linkignore\" = \".linkignore\"\n \n [tool.hatch.build.targets.sdist]\n exclude = [\n     \".mcpregistry_*\",\n     \".env\",\n",
+    "id": "E-PKG-002",
+    "kind": "source_diff",
+    "redactions": {
+      "credential": 0,
+      "email": 0,
+      "environment": 0,
+      "path": 0,
+      "url": 0
+    },
+    "sequence": 2,
+    "source": {
+      "job": null,
+      "original_line_end": 41,
+      "original_line_start": 24,
+      "path": "mcp_package/pyproject.toml",
+      "sha_role": "base_to_head",
+      "step": null
+    },
+    "title": "Packaging configuration change"
+  },
+  {
+    "content": "\n[tool.hatch.build.targets.sdist]\nexclude = [\n    \".mcpregistry_*\",\n    \".env\",\n    \".env.*\",\n    \"*.token\",\n    \"*.key\",\n    \"*.pem\",\n    \"*.p8\",\n    \"*.p12\",\n    \"id_rsa\",\n    \"id_ed25519\",\n    \"dist/\",\n]\n",
+    "id": "E-PKG-003",
+    "kind": "source",
+    "redactions": {
+      "credential": 0,
+      "email": 0,
+      "environment": 0,
+      "path": 0,
+      "url": 0
+    },
+    "sequence": 3,
+    "source": {
+      "job": null,
+      "original_line_end": 67,
+      "original_line_start": 53,
+      "path": "mcp_package/pyproject.toml",
+      "sha_role": "head",
+      "step": null
+    },
+    "title": "Source distribution configuration"
+  },
+  {
+    "content": "        working-directory: mcp_package\n        run: python -m build\n\n      - name: Check package metadata\n        working-directory: mcp_package\n        run: python -m twine check dist/*\n\n      - name: Install built wheel\n        working-directory: mcp_package\n        run: python -m pip install dist/*.whl\n\n      - name: MCP stdio smoke test\n        run: |\n          python link.py demo <TEMP> --force\n          # Slim (read-only) first on the pristine demo; the full smoke\n          # exercises mutating tools (rebuild_index, migrate_wiki,\n          # backup_wiki), so it runs last.\n          python scripts/smoke_mcp_stdio.py <TEMP>/wiki\n          python scripts/smoke_mcp_stdio.py <TEMP>/wiki --surface full\n",
+    "id": "E-PKG-004",
+    "kind": "source",
+    "redactions": {
+      "credential": 0,
+      "email": 0,
+      "environment": 0,
+      "path": 3,
+      "url": 0
+    },
+    "sequence": 4,
+    "source": {
+      "job": "package",
+      "original_line_end": 298,
+      "original_line_start": 280,
+      "path": ".github/workflows/ci.yml",
+      "sha_role": "head",
+      "step": "Build link-mcp"
+    },
+    "title": "Package job workflow commands"
+  }
+]

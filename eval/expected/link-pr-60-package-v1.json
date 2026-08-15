@@ -1,0 +1,22 @@
+{
+  "acceptable_outcomes": [
+    "diagnosed"
+  ],
+  "fixture_id": "link-pr-60-package-v1",
+  "forbidden_claims": [
+    "The failure is caused by a GitHub outage."
+  ],
+  "required_claims": [
+    "The package configuration references .linkignore, but the wheel build cannot find it in the generated source distribution."
+  ],
+  "required_evidence_ids": [
+    "E-PKG-001",
+    "E-PKG-002",
+    "E-PKG-003",
+    "E-PKG-004"
+  ],
+  "review_notes": [
+    "Require a causal explanation grounded in the log and packaging configuration."
+  ],
+  "schema_version": 1
+}
